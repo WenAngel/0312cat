@@ -348,6 +348,30 @@ template {
   list-style: none;
 }
 
+@-webkit-keyframes cat {
+  0% {
+    background-position: 0px 0px;
+  }
+  50% {
+    background-position: 0px -240px;
+  }
+  100% {
+    background-position: 0px 0px;
+  }
+}
+
+@keyframes cat {
+  0% {
+    background-position: 0px 0px;
+  }
+  50% {
+    background-position: 0px -240px;
+  }
+  100% {
+    background-position: 0px 0px;
+  }
+}
+
 html {
   font-size: 16px;
   /*font-family: sans-serif;*/
@@ -395,10 +419,14 @@ a:hover {
   color: #fff;
   text-align: center;
   text-decoration: none;
+  -webkit-transition-property: background;
+  transition-property: background;
+  -webkit-transition-duration: .5s;
+          transition-duration: .5s;
 }
 
 .top-menu a:hover {
-  background: #ff6204;
+  background: #9865d4;
 }
 
 .top-menu i {
@@ -678,6 +706,16 @@ h1.logo img {
       -ms-flex-direction: column-reverse;
           flex-direction: column-reverse;
   color: white;
+  /* h2 img {
+            display: none;
+            width: 60px;
+            height: 60px;
+            background-size: 60px, 60px;
+            background-position: 60px, 60px;
+            border-radius: 50%;
+            vertical-align: middle;
+            background: white;
+        }*/
 }
 
 .news-and-principle .principle .principle-content {
@@ -696,28 +734,39 @@ h1.logo img {
 
 .news-and-principle .principle h2::before {
   content: "";
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background: #fff url(../images/cat-head-animate@2x.png) no-repeat;
+  background-size: 60px 300px;
+  border-radius: 50%;
+  vertical-align: middle;
+  position: relative;
+  -webkit-animation-name: cat;
+          animation-name: cat;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: steps(4);
+          animation-timing-function: steps(4);
+}
+
+.news-and-principle .principle h2::after {
+  content: "";
   display: block;
   position: absolute;
   /*
-            border-top: red 8px solid;
-            border-right: transparent 8px solid;
-            border-bottom: transparent 8px solid;
-            border-left: transparent 8px solid;*/
+                border-top: red 8px solid;
+                border-right: transparent 8px solid;
+                border-bottom: transparent 8px solid;
+                border-left: transparent 8px solid;*/
   width: 0px;
   height: 0px;
   border: transparent 8px solid;
   border-top: #b38ddf 8px solid;
   top: 0;
   left: 40px;
-}
-
-.news-and-principle .principle h2 img {
-  display: inline-block;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  vertical-align: middle;
-  background: white;
 }
 
 .news-and-principle .principle li {
