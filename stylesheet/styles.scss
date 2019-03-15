@@ -38,6 +38,10 @@ html {
     color: #555;
 }
 
+img {
+    max-width: 100%; //最大的圖片寬度不要超出整個網頁的寬
+}
+
 a {
     color: #009ced;
     text-decoration: none;
@@ -106,6 +110,7 @@ h1.logo {
 }
 
 .search {
+    position: relative;
     input {
         width: 250px;
         /*加上padding-left後  所以要把原本的285-35 這樣框才不會太長*/
@@ -117,9 +122,10 @@ h1.logo {
         border-radius: 17px;
     }
     i {
-        position: relative;
+        position: absolute;
         /*推icon*/
-        left: 32px;
+        top: 9px;
+        left: 9px;
     }
     input:focus {
         /*調整focus框框*/
@@ -136,6 +142,9 @@ h1.logo {
     height: 38px;
     border-top: rgb(177, 177, 177) 1px solid;
     border-bottom: rgb(177, 177, 177) 1px solid;
+    button {
+        display: none;
+    }
     ul {
         @extend %nostyle-list;
         display: flex;
@@ -166,7 +175,12 @@ h1.logo {
     height: 400px;
     background: url(../images/index-image.jpg) center center no-repeat;
     background-size: cover;
-    position: relative;
+    .container {
+        position: relative;
+        height: 100%;
+        //因為h2設為絕對定位  會超脫世俗  所以撐不起container的高 導致h2顯示不出來 所以設一個高給container
+        //100%代表往上找.index-image的高  所以會是400px
+    }
     /*相對位子定位*/
     h2 {
         font-size: 50px;
@@ -174,10 +188,12 @@ h1.logo {
         /*為了支援舊版瀏覽器  先設一個白色*/
         color: rgba(255, 255, 255, 0.8);
         /*若瀏覽器看得懂 這句會把上面那句覆蓋*/
+        text-shadow: rgba(#fff, 0.8) 0 0 0, rgba(#000, 0.8) 0 0 5px; //加陰影 x不位移 y不位移 邊寬5px
         position: absolute;
-        /*絕對定位*/
+        /*絕對定位  需要一個參照容器 所以上面有position: relative;*/
         margin: 0 0 0 150px;
         left: 50%;
+        //上面 原本要依中線定位 為了修改視窗大小  所以改變(改變的地方在最下面)
         bottom: 80px;
         span {
             display: block;
@@ -258,7 +274,9 @@ h1.logo {
     }
     .news {
         /* width: 750px;*/
-        flex: 0 0 750px;
+        //flex: 0 0 750px;  
+        //當display設為flex的時候盡量用flex  不要用width 因為現在是左右分割  所以flex: 0 0 750px 的750px是代表寬(如果是上下分割就代表高)
+        flex: 1; // 因考慮視窗大小 所以改成自動延展縮減填滿 等於flex-grow: 1;   
         min-width: 0;
         h2 {
             margin: 0 0 20px;
@@ -288,9 +306,10 @@ h1.logo {
     .principle {
         /*width: 280px;*/
         flex: 0 0 280px;
-        margin-left: auto;
+        // margin-left: auto;
+        margin-left: 30px; //.news改成自動填滿後 要再留個間距
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column-reverse; //上下顛倒
         color: white;
         .principle-content {
             background: $main-color;
@@ -378,5 +397,202 @@ h1.logo {
     }
     .copyright {
         margin-top: 20px;
+    }
+}
+
+@media screen and(max-width: "1140px") {
+    .container {
+        width: 820px;
+    }
+    .index-image h2 {
+        left: auto;
+        margin: 0;
+        right: 2em;
+    }
+    .new-item li {
+        flex: 0 0 260px;
+    }
+    .page-footer li {
+        flex: 0 0 260px;
+    }
+}
+
+@media screen and(max-width: "880px") {
+    .container {
+        width: 740px;
+    }
+    .new-item ul {
+        flex-direction: column; //改成從上往下排
+    }
+    .new-item li {
+        display: flex;
+        flex-basis: auto; //不設這個會發現div的高會有260px  但行高應該要自己設 所以先設為auto
+        margin-bottom: 20px;
+    }
+    li:last-child {
+        margin-bottom: 0px;
+    }
+    /*  .new-item .new-text {
+        flex: 1;
+        margin-left: 30px;
+    }*/
+    /*如果想要圖片保持原樣可以用上面  下面三個是把整個縮小*/
+    li>a {
+        //>a表示只找li下一層的a
+        flex: 0 0 200px;
+        margin-right: 30px;
+    }
+    li>div {
+        flex: 1;
+    }
+    li h2 {
+        margin-top: 0;
+    }
+    .news-and-principle .container {
+        flex-direction: column;
+        .news {
+            margin-bottom: 40px;
+        }
+        .principle {
+            margin-left: 0;
+            flex-basis: auto; //不要原本設的260了
+            flex-direction: column;
+            h2 {
+                background: transparent; //變透明
+                color: #3d4143;
+                padding: 0;
+            }
+            h2::before {
+                border: $main-color 5px solid;
+            }
+            h2::after {
+                display: none; //讓三角形區塊消失不見
+            }
+            ol {
+                list-style: none;
+            }
+            ol li {
+                position: relative; //給一個相對位子作為絕對位子參照的容器
+            }
+            ol li::before {
+                width: 20px;
+                height: 20px;
+                display: block;
+                border-radius: 50%;
+                background: white;
+                color: $main-color;
+                text-align: center;
+                line-height: 20px;
+                position: absolute; //把圈圈用絕對定位的方式放在左側開頭
+                top: 2px;
+                left: -25px; //因為絕對定位會超脫世俗  所以不會自己擠到文字  所以要自己往左移
+            }
+            ol li:nth-child(1)::before {
+                content: "1";
+            }
+            ol li:nth-child(2)::before {
+                content: "2";
+            }
+            ol li:nth-child(3)::before {
+                content: "3";
+            }
+        }
+    }
+    .page-footer {
+        ul {
+            flex-direction: column;
+        }
+        li {
+            flex-basis: auto;
+        }
+    }
+}
+
+@media screen and(max-width: "767px") {
+    .container {
+        width: 90%;
+    }
+    .item-content {
+        flex-direction: column;
+        .item-img {
+            flex-basis: auto;
+            margin: 0 0 20px;
+        }
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+        .item-text {
+            text-align: center;
+        }
+    }
+}
+
+@media screen and(max-width: "640px") {
+    .top-block {
+        //margin-bottom: 40px;
+        height: auto;
+        .container {
+            //margin: 0;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+    h1.logo {
+        margin-bottom: 10px;
+    }
+    .search {
+        input {
+            width: 480px;
+        }
+    }
+    .main-menu {
+        position: relative;
+        .container {
+            width: 100%;
+        }
+        ul {
+            flex-direction: column;
+            position: absolute;
+            top: 40px;
+            width: 100%;
+            background: rgba(#fff, 0.9);
+            z-index: 5; //z-index是深度的推移  把menu往前搬
+            a {
+                margin: 0;
+            }
+        }
+        button {
+            display: block;
+            background: white;
+            border: none;
+            width: 100%;
+            height: 40px;
+            i {
+                margin-left: 5px;
+            }
+        }
+    }
+}
+
+@media screen and(max-width: "550px") {
+    .index-image h2 {
+        font-size: 35px;
+    }
+    .search {
+        input {
+            width: 300px;
+        }
+    }
+    .new-item li {
+        flex-direction: column;
+        align-items: center;
+        h2 {
+            text-align: center;
+            margin-top: 10px;
+        }
+    }
+    .news-and-principle .news a {
+        white-space: normal; //恢復正常
     }
 }
