@@ -43,8 +43,8 @@
     <!-- 主選單 -->
     <nav class="main-menu">
         <div class="container">
-
             <div>
+                <button>MENU<i class="fas fa-angle-down"></i></button>
                 <ul>
                     <li><a href="#">貓奴吃土區</a></li>
                     <li><a href="#">貓奴快訊</a></li>
@@ -62,9 +62,12 @@
 
     <!-- 首頁圖 -->
     <div class="index-image">
-        <h2>
-            只有為你<span>甘願為奴<i class="fas fa-heart"></i></span>
-        </h2>
+        <div class="container">
+            <h2>
+                只有為你<span>甘願為奴<i class="fas fa-heart"></i></span>
+            </h2>
+        </div>
+
     </div>
 
     <!-- 新品訊息 -->
@@ -75,28 +78,35 @@
                     <a href="#">
                         <img src="http://lorempixel.com/340/220/cats/" alt="貓圖" />
                     </a>
-                    <h2>
-                        <a href="#">新推出！家用寵物攝影機，讓你時時看見貓主子</a>
-                    </h2>
-                    <p>國安人士透露，這起地震是板塊碰撞擠壓所致，格子籠養雞太殘忍，如果你曾做過類似的事！之前八、九年來，何時凍結菲律賓外勞要兩個主管機關就我們國家最大的利益做最適當的決定。</p>
+                    <div class="new-text">
+                        <h2>
+                            <a href="#">新推出！家用寵物攝影機，讓你時時看見貓主子</a>
+                        </h2>
+                        <p>國安人士透露，這起地震是板塊碰撞擠壓所致，格子籠養雞太殘忍，如果你曾做過類似的事！之前八、九年來，何時凍結菲律賓外勞要兩個主管機關就我們國家最大的利益做最適當的決定。</p>
+                    </div>
+
                 </li>
                 <li>
                     <a href="#">
                         <img src="http://lorempixel.com/340/220/cats/" alt="貓圖" />
                     </a>
-                    <h2>
-                        <a href="#">新推出！家用寵物攝影機，讓你時時看見貓主子</a>
-                    </h2>
-                    <p>國安人士透露，這起地震是板塊碰撞擠壓所致，格子籠養雞太殘忍，如果你曾做過類似的事！之前八、九年來，何時凍結菲律賓外勞要兩個主管機關就我們國家最大的利益做最適當的決定。</p>
+                    <div class="new-text">
+                        <h2>
+                            <a href="#">新推出！家用寵物攝影機，讓你時時看見貓主子</a>
+                        </h2>
+                        <p>國安人士透露，這起地震是板塊碰撞擠壓所致，格子籠養雞太殘忍，如果你曾做過類似的事！之前八、九年來，何時凍結菲律賓外勞要兩個主管機關就我們國家最大的利益做最適當的決定。</p>
+                    </div>
                 </li>
                 <li>
                     <a href="#">
                         <img src="http://lorempixel.com/340/220/cats/" alt="貓圖" />
                     </a>
-                    <h2>
-                        <a href="#">新推出！家用寵物攝影機，讓你時時看見貓主子</a>
-                    </h2>
-                    <p>國安人士透露，這起地震是板塊碰撞擠壓所致，格子籠養雞太殘忍，如果你曾做過類似的事！之前八、九年來，何時凍結菲律賓外勞要兩個主管機關就我們國家最大的利益做最適當的決定。</p>
+                    <div class="new-text">
+                        <h2>
+                            <a href="#">新推出！家用寵物攝影機，讓你時時看見貓主子</a>
+                        </h2>
+                        <p>國安人士透露，這起地震是板塊碰撞擠壓所致，格子籠養雞太殘忍，如果你曾做過類似的事！之前八、九年來，何時凍結菲律賓外勞要兩個主管機關就我們國家最大的利益做最適當的決定。</p>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -180,6 +190,21 @@
             </div>
         </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <script>
+        $(function() {
+            // console.log("ready!");
+            //判斷按鈕出來了沒 有出來了在做下面的事
+            if ($(".main-menu button").is(":visible")) {
+                $(".main-menu ul").hide(); //主選單藏起來
+                $(".main-menu button").on("click", function() {
+                        $(".main-menu ul").toggle(); //切換ul顯示
+                        $(".main-menu button i").toggleClass("fa-angle-down").toggleClass("fa-angle-up"); //跟換icon
+                    }) //on(發生甚麼事,發生的事要做甚麼) }
+            }
+        });
+    </script>
 </body>
 
 </html>
