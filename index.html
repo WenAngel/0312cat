@@ -8,7 +8,18 @@
     <title>貓奴無極限</title>
     <link rel="stylesheet" href="stylesheet/styles.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136742643-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-136742643-1');
+    </script>
 </head>
 
 <body>
@@ -131,7 +142,7 @@
             </div>
 
         </div>
-        </div>
+
     </section>
 
     <!-- 最新快訊與我們的堅持 -->
@@ -195,7 +206,7 @@
     <script>
         $(function() {
             // console.log("ready!");
-            //判斷按鈕出來了沒 有出來了在做下面的事
+            //if是要判斷按鈕出來了沒 有出來了在做下面的事
             if ($(".main-menu button").is(":visible")) {
                 $(".main-menu ul").hide(); //主選單藏起來
                 $(".main-menu button").on("click", function() {
